@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.coolweather" >
+    package="com.example.coolweather">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,14 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoolWeather"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
+        <service
+            android:name=".service.AutoUpdateService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".WeatherActivity"
-            android:exported="true" />
-        <!-- usesCleartextTraffic  配置允许HTTP访问 -->
+            android:exported="true" /> <!-- usesCleartextTraffic  配置允许HTTP访问 -->
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
