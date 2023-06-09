@@ -23,6 +23,10 @@ import com.example.coolweather.gson.Forecast;
 import com.example.coolweather.gson.Weather;
 import com.example.coolweather.util.HttpUtil;
 import com.example.coolweather.util.Utility;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -106,16 +110,17 @@ public class WeatherActivity extends AppCompatActivity {
 
 
     private void loadBingPic(){
-        String requestBingPic = "http://guolin.tech/api/bing_pic";
+        String requestBingPic = "https://api.cyrilstudio.top/bing/image.php";
         HttpUtil.sendOkHttpRequest(requestBingPic, new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 e.printStackTrace();
+                Toast.makeText(getBaseContext(),"每日一图加载失败",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                final String bingPic = response.body().string();
+                final String bingPic = response.request().url().toString();
                 SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
                 editor.putString("bing_pic",bingPic);
                 editor.apply();

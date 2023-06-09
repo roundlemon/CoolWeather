@@ -17,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         LitePal.initialize(this);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("bing_pic");
+        editor.apply();
         if(preferences.getString("weather",null)!=null){
             Intent intent = new Intent(this,WeatherActivity.class);
             startActivity(intent);
