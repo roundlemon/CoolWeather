@@ -69,6 +69,8 @@ public class WeatherActivity extends AppCompatActivity {
 
     public DrawerLayout drawerLayout;
 
+    private String weatherId;
+
     private Button navButton;
 
     @SuppressLint("ResourceAsColor")
@@ -106,7 +108,6 @@ public class WeatherActivity extends AppCompatActivity {
         swipeRefreshLayout.setColorSchemeColors(R.color.purple_200);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather",null);
-        final String weatherId;
         if (weatherString != null){
             //有缓存时直接解析
             Weather weather = Utility.handleWeatherResponse(weatherString);
@@ -165,8 +166,8 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
 
-    public void requestWeather(final String weatherId){
-        String weatherUrl = "http://guolin.tech/api/weather?cityid="+weatherId+"&key=4fcaa1a20a1b49ae839dfa0e47c44f75";
+    public void requestWeather(final String mweatherId){
+        String weatherUrl = "http://guolin.tech/api/weather?cityid="+mweatherId+"&key=4fcaa1a20a1b49ae839dfa0e47c44f75";
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -191,6 +192,7 @@ public class WeatherActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
                             editor.putString("weather",responseText);
                             editor.apply();
+                            weatherId = weather.basic.weatherId;
                             showWeatherInfo(weather);
                         }else{
                             Toast.makeText(WeatherActivity.this,"获取天气信息失败",Toast.LENGTH_SHORT).show();
