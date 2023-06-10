@@ -71,9 +71,10 @@ public class ChooseAreaFragment extends Fragment {
         return view;
     }
 
+
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,6 +113,7 @@ public class ChooseAreaFragment extends Fragment {
         });
         queryProvinces();
     }
+
 
     private void queryProvinces() {
         titleText.setText("中国");

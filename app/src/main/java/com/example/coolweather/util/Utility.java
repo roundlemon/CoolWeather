@@ -1,6 +1,7 @@
 package com.example.coolweather.util;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.coolweather.WeatherActivity;
 import com.example.coolweather.db.City;
@@ -86,6 +87,7 @@ public class Utility {
         try{
             JSONObject jsonObject = new JSONObject(response);
             JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            Log.d("TAG", ": "+jsonArray.getJSONObject(0).toString());
             String weatherContent = jsonArray.getJSONObject(0).toString();
             return new Gson().fromJson(weatherContent,Weather.class);
         }catch (Exception e){

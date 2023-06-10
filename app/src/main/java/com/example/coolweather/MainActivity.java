@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LitePal.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
-        LitePal.initialize(this);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove("bing_pic");
